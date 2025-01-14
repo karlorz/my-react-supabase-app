@@ -5,6 +5,9 @@
            branches:
              - master # 或您要部署的分支名稱
 
+       permissions:
+         contents: write
+
        jobs:
          build-and-deploy:
            runs-on: ubuntu-latest
