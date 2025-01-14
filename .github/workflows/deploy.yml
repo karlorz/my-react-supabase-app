@@ -1,0 +1,34 @@
+       name: Deploy to GitHub Pages
+
+       on:
+         push:
+           branches:
+             - master # 或您要部署的分支名稱
+
+       jobs:
+         build-and-deploy:
+           runs-on: ubuntu-latest
+           steps:
+             - name: Checkout code
+               uses: actions/checkout@v4
+
+             - name: Setup Node.js
+               uses: actions/setup-node@v4
+               with:
+                 node-version: 20 # 或您使用的 Node.js 版本
+
+             - name: Install dependencies
+               run: yarn install
+
+             - name: Set Supabase environment variables
+               run: |
+                 echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}" >> .env
+                 echo "VITE_SUPABASE_ANON_KEY=${{ secrets.VITE_SUPABASE_ANON_KEY }}" >> .env
+               
+             - name: Build project
+               run: yarn build
+
+             - name: Deploy to GitHub Pages
+               uses: JamesIves/github-pages-deploy-action@v4
+               with:
+                 folder: dist
