@@ -5,5 +5,5 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   plugins: [react()],
   envDir: "./env",
-  base: process.env.CI ? "/my-react-supabase-app/" : "/",
+  // base: process.env.CI ? "/my-react-supabase-app/" : "/",
 });
